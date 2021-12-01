@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  ActivityIndicator,
-  TouchableHighlight,
-  Image,
-} from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
+
+import { TodoItem } from '../components/TodoItem';
 
 const QuoteText = styled.Text`
   font-weight: 700;
 `;
 
 const Container = styled.View`
-  border: 2px solid green;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,7 +16,6 @@ const Container = styled.View`
 
 const APIButton = styled.TouchableHighlight`
   border-radius: 10px;
-
   text-transform: uppercase;
   background: #161616;
   padding: 5px;
@@ -31,23 +25,24 @@ const APIButton = styled.TouchableHighlight`
 `;
 
 const ApiButtonText = styled.Text`
-  color: yellow;
+  color: white;
   width: 100%;
 `;
 
 const ButtonContainer = styled.View`
   display: flex;
   justify-content: center;
-  border: 2px solid red;
+  align-items: center;
+  height: 100px;
 `;
 
 export const Bored = () => {
   const [activity, setActivity] = useState({});
   const [loading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   generateActivity();
-  // }, []);
+  useEffect(() => {
+    generateActivity();
+  }, [setActivity]);
 
   const generateActivity = () => {
     setLoading(true);
@@ -64,16 +59,14 @@ export const Bored = () => {
   return (
     <>
       <Container>
-        <Image source={require('../assets/bored.png')} />
         <ButtonContainer>
           <APIButton onPress={generateActivity}>
             <ApiButtonText>I'm bored, give me something to do</ApiButtonText>
           </APIButton>
         </ButtonContainer>
-        <View>
-          <QuoteText>Activity: {activity.activity}</QuoteText>
-          <Text>Type: {activity.type}</Text>
-        </View>
+        <QuoteText>Activity: {activity.activity}</QuoteText>
+        <Text>Type: {activity.type}</Text>
+        <View></View>
       </Container>
     </>
   );

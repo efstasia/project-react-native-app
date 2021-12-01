@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Text, Button, TextInput } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { Text, TouchableHighlight, View, Button } from 'react-native';
+
+import { Bored } from './Bored';
+//import { useDispatch, useSelector } from 'react-redux';
 
 //import user from '../reducers/user';
 
@@ -11,7 +13,9 @@ const FeedContainer = styled.View`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  position: relative;
+  background: #faf0e6;
+  height: 100vh;
 `;
 
 const TextInputField = styled.TextInput`
@@ -20,31 +24,34 @@ const TextInputField = styled.TextInput`
 
 // The prop "navigation" is important if you are trying to open/toggle the drawer
 //  directly via Javascript
-export const Feed = () => {
+export const Feed = ({ navigation }) => {
   const [user, setUser] = useState('');
-  // const showUser = useSelector(store => store.user.username); // store + "the slice" + items from slice in todos.js
 
-  // const dispatch = useDispatch();
-
-  const handleNameChange = event => {
-    setUser(event.target.value);
-  };
-
-  const onNameSet = event => {
-    setUser(user);
-  };
+  // const onPress = () => {
+  //   setUser(user === '' ? '' : setUser);
+  // };
 
   return (
     <FeedContainer>
-      <Text>Feed Screen</Text>
-      <TextInputField onChangeText={handleNameChange} />
+      <Text>Enter name here</Text>
+      <TextInputField
+        placeholder='e.g JohnDoe'
+        //    onChangeText={(value) => {
+        //setUser(value)
+        //setUser(value === '' ? '' : value) // value is latest
 
-      <Button title='add name' onPress={() => setUser(user)} />
-      {/* <Text>Hello {user}</Text> */}
+        //}}
+        onChangeText={user => setUser(user)}
+        value={user}
+      ></TextInputField>
 
-      {/* Here is an example of how to open/toggle the drawer via javascript */}
-      {/* <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
-      <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} /> */}
+      <View>
+        <Text>{user ? <Text>Hello {user} 🌞</Text> : ''}</Text>
+      </View>
+
+      <TouchableHighlight onPress={() => navigation.navigate('Bored')}>
+        <Text>I'm bored, give me an activity"</Text>
+      </TouchableHighlight>
     </FeedContainer>
   );
 };
