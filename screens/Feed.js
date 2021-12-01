@@ -15,7 +15,6 @@ const FeedContainer = styled.View`
   align-items: center;
   position: relative;
   background: #faf0e6;
-  height: 100vh;
 `;
 
 const TextInputField = styled.TextInput`
